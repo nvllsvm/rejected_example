@@ -1,0 +1,24 @@
+Application:
+  Connections:
+    rabbit1:
+      host: localhost
+      port: 5672
+      user: guest
+      pass: guest
+  Consumers:
+    example:
+      consumer: examples.consumers.ExampleConsumer
+      connections: [rabbit1]
+      queue: example
+      qos_prefetch: 1
+
+Logging:
+  formatters:
+      verbose:
+          format: "%(levelname) -10s %(asctime)s  %(message)s"
+          datefmt: "%Y-%m-%d %H:%M:%S"
+  loggers:
+      rejected: {}
+  root:
+    level: INFO
+    handlers: [console]

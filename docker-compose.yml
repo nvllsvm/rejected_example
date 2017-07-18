@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+    rabbitmq:
+        image: rabbitmq:alpine
+        hostname: rabbitmq
+        environment:
+            - RABBITMQ_ERLANG_COOKIE=thecookie
+        ports:
+            - "5672:5672"
+        volumes:
+            - ./rabbitmq_home:/var/lib/rabbitmq
+    shell:
+        image: rabbitmq:alpine
+        links:
+            - rabbitmq
+        environment:
+            - RABBITMQ_NODENAME=rabbit@rabbitmq
+        entrypoint: bash
+        volumes:
+            - ./rabbitmq_home:/var/lib/rabbitmq
